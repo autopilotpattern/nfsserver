@@ -1,0 +1,12 @@
+{
+  "consul": "consul:8500",
+  "services": [
+    {
+      "name": "nfs",
+      "port": 111,
+      "health": "true",
+      "poll": 3,
+      "ttl": 10
+    }
+  ]
+}
