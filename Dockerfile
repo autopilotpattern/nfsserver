@@ -1,14 +1,14 @@
 # Node.js and Containerbuddy
-FROM gliderlabs/alpine:3.3
+FROM node:0.12-slim
 
-# install curl
-RUN apk update && apk add \
-    nodejs \
-    make \
-    python \
-    git \
-    curl \
-    && rm -rf /var/cache/apk/*
+
+RUN \
+    buildDeps='git g++ python' \
+    runDeps='ca-certificates curl' \
+    && set -x \
+    && apt-get update && apt-get install -y $buildDeps $runDeps --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+#    && apt-get purge -y --auto-remove $buildDeps
 
 # install sdc-nfs
 COPY package.json /opt/nfs/
