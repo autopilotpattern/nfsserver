@@ -1,18 +1,22 @@
-# Node.js and Containerbuddy
+# Based on the official Node.js 0.10 image, 
+# because it's the easiest way to get that version and the image is small enough
 FROM node:0.10-slim
 
+# Put our Node.js app definition in place
+COPY package.json /opt/nfs/
 
+# Install our Node.js app
+# $buildDeps will be added for the `npm install`, then removed immediately after
+# the resulting image layer will not include the size of the $buildDeps
 RUN \
     buildDeps='git g++ make python' \
     runDeps='ca-certificates curl' \
     && set -x \
     && apt-get update && apt-get install -y $buildDeps $runDeps --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-#    && apt-get purge -y --auto-remove $buildDeps
-
-# install sdc-nfs
-COPY package.json /opt/nfs/
-RUN cd /opt/nfs && npm install
+    && cd /opt/nfs \
+    && npm install \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get purge -y --auto-remove $buildDeps
 
 # Add Containerbuddy and its configuration
 ENV CONTAINERBUDDY_VER 1.2.1
