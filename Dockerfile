@@ -1,9 +1,9 @@
 # Node.js and Containerbuddy
-FROM node:0.12-slim
+FROM node:0.10-slim
 
 
 RUN \
-    buildDeps='git g++ python' \
+    buildDeps='git g++ make python' \
     runDeps='ca-certificates curl' \
     && set -x \
     && apt-get update && apt-get install -y $buildDeps $runDeps --no-install-recommends \
