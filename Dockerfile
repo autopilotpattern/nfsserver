@@ -38,7 +38,6 @@ EXPOSE 111 2049
 # define the volume for the NFS export
 VOLUME /exports
 
-CMD ["node", \
-    "/opt/nfs/node_modules/sdc-nfs/server.js", \
-		"-f", \
-		"/opt/nfs/sdc-nfs-config.json"]
+CMD ["node", "/opt/nfs/node_modules/sdc-nfs/server.js", \
+	"-f", \
+	"/opt/nfs/sdc-nfs-config.json"]
