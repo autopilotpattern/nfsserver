@@ -19,13 +19,24 @@ RUN \
     && apt-get purge -y --auto-remove $buildDeps
 
 # Add Containerbuddy and its configuration
-ENV CONTAINERBUDDY_VER 1.2.1
-ENV CONTAINERBUDDY_CHECKSUM aca04b3c6d6ed66294241211237012a23f8b4f20
+ENV CONTAINERBUDDY_VER 1.3
+ENV CONTAINERBUDDY_CHECKSUM c25d3af30a822f7178b671007dcd013998d9fae1
 ENV CONTAINERBUDDY file:///etc/containerbuddy.json
 
-RUN export CB_SHA1=aca04b3c6d6ed66294241211237012a23f8b4f20 \
+RUN export CB_SHA1=c25d3af30a822f7178b671007dcd013998d9fae1 \
     && curl -Lso /tmp/containerbuddy.tar.gz \
          "https://github.com/joyent/containerbuddy/releases/download/${CONTAINERBUDDY_VER}/containerbuddy-${CONTAINERBUDDY_VER}.tar.gz" \
     && echo "${CONTAINERBUDDY_CHECKSUM}  /tmp/containerbuddy.tar.gz" | sha1sum -c \
     && tar zxf /tmp/containerbuddy.tar.gz -C /bin \
     && rm /tmp/containerbuddy.tar.gz
+
+# Put our NFS config file in place
+COPY sdc-nfs-config.json /opt/nfs/.
+
+# define the volume for the NFS export
+VOLUME /exports
+
+CMD ["node", \
+    "/opt/nfs/node_modules/sdc-nfs/server.js", \
+		"-f", \
+		"/opt/nfs/sdc-nfs-config.json"]
