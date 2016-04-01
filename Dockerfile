@@ -10,7 +10,7 @@ COPY package.json /opt/nfs/
 # the resulting image layer will not include the size of the $buildDeps
 RUN \
     buildDeps='git g++ make python' \
-    runDeps='ca-certificates curl' \
+    runDeps='nfs-common ca-certificates curl' \
     && set -x \
     && apt-get update && apt-get install -y $buildDeps $runDeps --no-install-recommends \
     && cd /opt/nfs \
@@ -19,7 +19,7 @@ RUN \
     && apt-get purge -y --auto-remove $buildDeps
 
 # Add Containerbuddy and its configuration
-ENV CONTAINERBUDDY_VER 1.3
+ENV CONTAINERBUDDY_VER 1.3.0
 ENV CONTAINERBUDDY_CHECKSUM c25d3af30a822f7178b671007dcd013998d9fae1
 ENV CONTAINERBUDDY file:///etc/containerbuddy.json
 

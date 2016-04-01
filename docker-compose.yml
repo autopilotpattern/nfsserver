@@ -14,7 +14,7 @@ client:
     restart: always
     labels:
       - triton.cns.services=client
-    link:
+    links:
       - nfs
     command: sleep 30d
 
