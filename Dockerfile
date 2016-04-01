@@ -33,6 +33,8 @@ RUN export CB_SHA1=c25d3af30a822f7178b671007dcd013998d9fae1 \
 # Put our NFS config file in place
 COPY sdc-nfs-config.json /opt/nfs/.
 
+EXPOSE 111 2049
+
 # define the volume for the NFS export
 VOLUME /exports
 
