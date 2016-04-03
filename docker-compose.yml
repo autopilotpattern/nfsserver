@@ -1,5 +1,5 @@
 nfs:
-    image: blah
+    image: nfs
     mem_limit: 256m
     restart: always
     labels:

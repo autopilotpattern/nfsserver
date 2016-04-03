@@ -7,7 +7,7 @@ COPY package.json /opt/nfs/
 
 # Install our Node.js app
 # $buildDeps will be added for the `npm install`, then removed immediately after
-# the resulting image layer will not include the size of the $buildDeps
+# The resulting image layer will not include the size of the $buildDeps
 RUN \
     buildDeps='git g++ make python' \
     runDeps='nfs-common ca-certificates curl vim' \
@@ -31,7 +31,10 @@ RUN export CB_SHA1=c25d3af30a822f7178b671007dcd013998d9fae1 \
     && rm /tmp/containerbuddy.tar.gz
 
 # Put our NFS config file in place
-COPY sdc-nfs-config.json /opt/nfs/.
+COPY sdc-nfs-config.json /opt/nfs/sdc-nfs-config.json
+
+# Create a directory required by rpcbind
+RUN mkdir -p /run/sendsigs.omit.d
 
 EXPOSE 111 2049
 

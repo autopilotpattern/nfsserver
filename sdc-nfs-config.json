@@ -1,4 +1,7 @@
 {
+    "portmap": {
+        "usehost": 1
+    },
     "mount": {
         "address": "0.0.0.0",
         "exports": {
