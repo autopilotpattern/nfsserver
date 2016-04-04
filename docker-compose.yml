@@ -1,11 +1,13 @@
 nfs:
     image: nfs
+    privileged: true
     mem_limit: 256m
     restart: always
     labels:
       - triton.cns.services=nfs
     ports:
       - 111
+      - 1892
       - 2049
 
 client:
@@ -13,9 +15,7 @@ client:
     mem_limit: 128m
     restart: always
     labels:
-      - triton.cns.services=client
-    links:
-      - nfs
+      - triton.cns.services=nfsclient
     command: sleep 30d
 
 # Start with a single host which will bootstrap the cluster.

@@ -1,5 +1,5 @@
 {
-  "name": "autopilotpattern-nfs-server",
+  "name": "autopilotpattern-nfsserver",
   "description": "Autopilot pattern NFS server",
   "version": "1.0.0",
   "author": "Joyent (joyent.com)",

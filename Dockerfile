@@ -1,5 +1,5 @@
 # Based on the official Node.js 0.10 image, 
-# because it's the easiest way to get that version and the image is small enough
+# because it's the easiest way to get that version
 FROM node:0.10-slim
 
 # Put our Node.js app definition in place
@@ -30,17 +30,20 @@ RUN export CB_SHA1=c25d3af30a822f7178b671007dcd013998d9fae1 \
     && tar zxf /tmp/containerbuddy.tar.gz -C /bin \
     && rm /tmp/containerbuddy.tar.gz
 
-# Put our NFS config file in place
-COPY sdc-nfs-config.json /opt/nfs/sdc-nfs-config.json
+# Put our configs and helper files in place
+COPY etc /etc
+COPY bin /usr/local/bin
 
 # Create a directory required by rpcbind
 RUN mkdir -p /run/sendsigs.omit.d
 
-EXPOSE 111 2049
+EXPOSE 111 1892 2049
 
 # define the volume for the NFS export
 VOLUME /exports
 
-CMD ["node", "/opt/nfs/node_modules/sdc-nfs/server.js", \
+CMD [ "/bin/containerbuddy", \
+    "node", \
+    "/opt/nfs/node_modules/sdc-nfs/server.js", \
 	"-f", \
-	"/opt/nfs/sdc-nfs-config.json"]
+	"/etc/sdc-nfs.json"]
