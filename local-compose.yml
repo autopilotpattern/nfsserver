@@ -20,6 +20,7 @@ client:
       - CONSUL=consul
     links:
       - consul:consul
+      - nfs:nfs
 
 consul:
     extends:
