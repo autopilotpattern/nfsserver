@@ -5,7 +5,7 @@ nfs:
     restart: always
     labels:
       - triton.cns.services=nfs
-    ports:
+    expose:
       - 111
       - 1892
       - 2049
@@ -18,6 +18,8 @@ client:
     labels:
       - triton.cns.services=nfsclient
     command: sleep 30d
+    links:
+      - nfs:nfs
 
 # Start with a single host which will bootstrap the cluster.
 # In production we'll want to use an HA cluster.
@@ -31,6 +33,8 @@ consul:
       - 8301
       - 8302
       - 8400
+      - 8500
+    ports:
       - 8500
     dns:
        - 127.0.0.1
