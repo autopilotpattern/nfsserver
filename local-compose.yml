@@ -1,0 +1,29 @@
+nfs:
+    extends:
+      file: docker-compose.yml
+      service: nfs
+    build: .
+    environment:
+      - CONSUL=consul
+    links:
+      - consul:consul
+    ports:
+      - "111:111"
+      - "1892:1892"
+      - "2049:2049"
+
+client:
+    extends:
+      file: docker-compose.yml
+      service: client
+    environment:
+      - CONSUL=consul
+    links:
+      - consul:consul
+
+consul:
+    extends:
+      file: docker-compose.yml
+      service: consul
+    ports:
+      - "8500:8500"    
