@@ -9,6 +9,8 @@ nfs:
       - 111
       - 1892
       - 2049
+    environment:
+      - CONSUL=consul
 
 client:
     image: ubuntu

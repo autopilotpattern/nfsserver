@@ -16,8 +16,6 @@ client:
     extends:
       file: docker-compose.yml
       service: client
-    environment:
-      - CONSUL=consul
     links:
       - consul:consul
       - nfs:nfs
