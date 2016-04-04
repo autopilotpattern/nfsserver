@@ -1,5 +1,5 @@
 nfs:
-    image: nfs
+    image: misterbisson/nfsserver
     privileged: true
     mem_limit: 256m
     restart: always
