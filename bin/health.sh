@@ -16,14 +16,7 @@ then
     exit 1
 fi
 
-pid=$(pidof /usr/sbin/rpc.idmapd)
-if [ -z "$pid" ]
-then
-    echo "/usr/sbin/rpc.idmapd not running"
-    exit 1
-fi
-
-# Check that Node.js is running 
+# Check that Node.js is running (thought that doesn't mean that the NFS server is running)
 # Future use: this script for Nagios might be useful:
 # https://exchange.nagios.org/directory/Plugins/Operating-Systems/Linux/check_nfs_health-2Esh/details
 

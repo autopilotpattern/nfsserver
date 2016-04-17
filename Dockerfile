@@ -18,16 +18,15 @@ RUN \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get purge -y --auto-remove $buildDeps
 
-# Add Containerbuddy and its configuration
-ENV CONTAINERBUDDY_VER 1.3.0
-ENV CONTAINERBUDDY file:///etc/containerbuddy.json
-
-RUN export CONTAINERBUDDY_CHECKSUM=c25d3af30a822f7178b671007dcd013998d9fae1 \
-    && curl -Lso /tmp/containerbuddy.tar.gz \
-         "https://github.com/joyent/containerbuddy/releases/download/${CONTAINERBUDDY_VER}/containerbuddy-${CONTAINERBUDDY_VER}.tar.gz" \
-    && echo "${CONTAINERBUDDY_CHECKSUM}  /tmp/containerbuddy.tar.gz" | sha1sum -c \
-    && tar zxf /tmp/containerbuddy.tar.gz -C /bin \
-    && rm /tmp/containerbuddy.tar.gz
+# Add Containerpilot and set its configuration file path
+ENV CONTAINERPILOT_VER 2.0.1
+ENV CONTAINERPILOT file:///etc/containerpilot.json
+RUN export CONTAINERPILOT_CHECKSUM=a4dd6bc001c82210b5c33ec2aa82d7ce83245154 \
+    && curl -Lso /tmp/containerpilot.tar.gz \
+        "https://github.com/joyent/containerpilot/releases/download/${CONTAINERPILOT_VER}/containerpilot-${CONTAINERPILOT_VER}.tar.gz" \
+    && echo "${CONTAINERPILOT_CHECKSUM}  /tmp/containerpilot.tar.gz" | sha1sum -c \
+    && tar zxf /tmp/containerpilot.tar.gz -C /usr/local/bin \
+    && rm /tmp/containerpilot.tar.gz
 
 # Put our configs and helper files in place
 COPY etc /etc
@@ -41,7 +40,7 @@ EXPOSE 111 1892 2049
 # define the volume for the NFS export
 VOLUME /exports
 
-CMD [ "/bin/containerbuddy", \
+CMD [ "/usr/local/bin/containerpilot", \
     "node", \
     "/opt/nfs/node_modules/sdc-nfs/server.js", \
 	"-f", \

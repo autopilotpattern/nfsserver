@@ -1,8 +1,9 @@
-nfs:
+nfsserver:
     extends:
       file: docker-compose.yml
-      service: nfs
+      service: nfsserver
     build: .
+    mem_limit: 128g
     environment:
       - CONSUL=consul
     links:
@@ -11,14 +12,6 @@ nfs:
       - "111:111"
       - "1892:1892"
       - "2049:2049"
-
-client:
-    extends:
-      file: docker-compose.yml
-      service: client
-    links:
-      - consul:consul
-      - nfs:nfs
 
 consul:
     extends:
