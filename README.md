@@ -1,6 +1,12 @@
 # Autopilot Pattern NFS server
 
-This repo Dockerizes [sdc-nfs](https://github.com/joyent/sdc-nfs), an NFS v3 server implementation in Node.js. This allows users to use NFS in projects without requiring kernel NFS support or privileged access. (Actually, the server and client containers need `privileged` on Linux hosts, though I'm hoping we can find a way to avoid that. This does not effect usage on Triton.)
+This repo Dockerizes [sdc-nfs](https://github.com/joyent/sdc-nfs), an NFS v3 server implementation in Node.js. This is intended to allow use NFS in projects without requiring kernel NFS support or privileged access, but that is unfortunately not true. 
+
+## This is not recommended for production use
+
+Server and client containers need `privileged` on Linux hosts (though not on Triton, which supports this securely). This may not be a solvable problem. Docker volume drivers are probably the best recommended work around. On Triton, [RFD26 will provide network shared filesystems](https://github.com/joyent/rfd/blob/master/rfd/0026/README.md) to Docker containers using Docker volume syntax.
+
+For now, consider this an experiment.
 
 ### Example usage
 
