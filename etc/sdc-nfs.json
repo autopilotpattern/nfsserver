@@ -1,0 +1,19 @@
+{
+    "portmap": {
+        "usehost": 1
+    },
+    "mount": {
+        "address": "0.0.0.0",
+        "exports": {
+            "/exports": {}
+        }
+    },
+    "nfs": {
+        "uid": 65534,
+        "gid": 65534,
+        "fd_cache": {
+            "max": 50,
+            "ttl": 15
+        }
+    }
+}

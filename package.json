@@ -1,0 +1,11 @@
+{
+  "name": "autopilotpattern-nfsserver",
+  "description": "Autopilot pattern NFS server",
+  "version": "1.0.0",
+  "author": "Joyent (joyent.com)",
+  "private": true,
+  "dependencies": {
+    "sdc-nfs": "git+https://github.com/joyent/sdc-nfs.git#master"
+  },
+  "license": "MPL-2.0"
+}
