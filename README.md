@@ -2,6 +2,11 @@
 
 This repo Dockerizes [sdc-nfs](https://github.com/joyent/sdc-nfs), an NFS v3 server implementation in Node.js. This is intended to allow use NFS in projects without requiring kernel NFS support or privileged access, but that is unfortunately not true. 
 
+[![DockerPulls](https://img.shields.io/docker/pulls/autopilotpattern/nfsserver.svg)](https://registry.hub.docker.com/u/autopilotpattern/nfsserver/)
+[![DockerStars](https://img.shields.io/docker/stars/autopilotpattern/nfsserver.svg)](https://registry.hub.docker.com/u/autopilotpattern/nfsserver/)
+[![MicroBadger version](https://images.microbadger.com/badges/version/autopilotpattern/nfsserver.svg)](http://microbadger.com/#/images/autopilotpattern/nfsserver)
+[![MicroBadger commit](https://images.microbadger.com/badges/commit/autopilotpattern/nfsserver.svg)](http://microbadger.com/#/images/autopilotpattern/nfsserver)
+
 ## This is not recommended for production use
 
 Server and client containers need `privileged` on Linux hosts (though not on Triton, which supports this securely). This may not be a solvable problem. Docker volume drivers are probably the best recommended work around. On Triton, [RFD26 will provide network shared filesystems](https://github.com/joyent/rfd/blob/master/rfd/0026/README.md) to Docker containers using Docker volume syntax.
@@ -59,3 +64,12 @@ ls -al /nfs
 ### Hacking
 
 This Docker image automates operations using [ContainerPilot](https://www.joyent.com/containerpilot). See both the Dockerfile and ContainerPilot config for more details of the implementation. A walkthrough of how to build your own applications using the [Autopilot Pattern](http://autopilotpattern.io/) can be found at [autopilotpattern.io/example](http://autopilotpattern.io/example).
+
+### Building
+
+This image implements [microbadger.com](https://microbadger.com/#/labels) label schema, but those labels require additional build args:
+
+```
+docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+               --build-arg VCS_REF=`git rev-parse --short HEAD` .
+```
