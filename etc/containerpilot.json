@@ -37,6 +37,7 @@
         "type": "gauge",
         "poll": 5,
         "check": ["/usr/local/bin/sensor.sh", "sys_disk"]
+      }
     ]
   }
 }
