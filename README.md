@@ -2,6 +2,11 @@
 
 This repo Dockerizes [sdc-nfs](https://github.com/joyent/sdc-nfs), an NFS v3 server implementation in Node.js. This is intended to allow use NFS in projects without requiring kernel NFS support or privileged access, but that is unfortunately not true. 
 
+[![DockerPulls](https://img.shields.io/docker/pulls/autopilotpattern/nfsserver.svg)](https://registry.hub.docker.com/u/autopilotpattern/nfsserver/)
+[![DockerStars](https://img.shields.io/docker/stars/autopilotpattern/nfsserver.svg)](https://registry.hub.docker.com/u/autopilotpattern/nfsserver/)
+[![MicroBadger version](https://images.microbadger.com/badges/version/autopilotpattern/nfsserver.svg)](http://microbadger.com/#/images/autopilotpattern/nfsserver)
+[![MicroBadger commit](https://images.microbadger.com/badges/commit/autopilotpattern/nfsserver.svg)](http://microbadger.com/#/images/autopilotpattern/nfsserver)
+
 ## This is not recommended for production use
 
 Server and client containers need `privileged` on Linux hosts (though not on Triton, which supports this securely). This may not be a solvable problem. Docker volume drivers are probably the best recommended work around. On Triton, [RFD26 will provide network shared filesystems](https://github.com/joyent/rfd/blob/master/rfd/0026/README.md) to Docker containers using Docker volume syntax.
