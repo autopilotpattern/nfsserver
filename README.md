@@ -59,3 +59,12 @@ ls -al /nfs
 ### Hacking
 
 This Docker image automates operations using [ContainerPilot](https://www.joyent.com/containerpilot). See both the Dockerfile and ContainerPilot config for more details of the implementation. A walkthrough of how to build your own applications using the [Autopilot Pattern](http://autopilotpattern.io/) can be found at [autopilotpattern.io/example](http://autopilotpattern.io/example).
+
+### Building
+
+This image implements [microbadger.com](https://microbadger.com/#/labels) label schema, but those labels require additional build args:
+
+```
+docker build --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+               --build-arg VCS_REF=`git rev-parse --short HEAD` .
+```

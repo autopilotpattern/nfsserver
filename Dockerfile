@@ -22,7 +22,7 @@ COPY package.json /opt/nfs/
 # The resulting image layer will not include the size of the $buildDeps
 RUN \
     buildDeps='git g++ make python' \
-    runDeps='nfs-common ca-certificates curl vim' \
+    runDeps='nfs-common ca-certificates curl vim zip' \
     && set -x \
     && apt-get update && apt-get install -y $buildDeps $runDeps --no-install-recommends \
     && cd /opt/nfs \
